@@ -2,8 +2,11 @@
 // 15/20 -> You got a C (75%)!
 // A 90-100, B 80-89, C 70-79, D 60-69, F 0-59
 
-let gradeCalc = function (stScore, totScore) {
-    let score = (stScore / totScore) * 100
+let gradeCalc = (stScore, totScore) => {
+    if (typeof totScore !== 'number' || typeof stScore !== 'number') {
+        throw Error('Argument must be a number')
+    } 
+    const score = (stScore / totScore) * 100
     let mark = ''
     if (score >= 90) {
         mark = 'A'
@@ -19,5 +22,9 @@ let gradeCalc = function (stScore, totScore) {
     return `You got a ${mark} (${score}%)!`
 }
 
-let result = gradeCalc(9, 20)
-console.log(result)
+try {
+    const result = gradeCalc('', 100)
+    console.log(result)
+} catch (e) {
+    console.log(e.message);
+}
